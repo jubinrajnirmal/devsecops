@@ -43,7 +43,7 @@ jobs:
        version: 24.0.5
      
    - name: Docker Login
-     run: echo ${{ secrets.REPO_PWD}} | docker login -u ${[ secrets.REPO_USER ]} --password-stdin
+     run: echo ${{ secrets.REPO_PWD}} | docker login -u ${[ secrets.REPO_USER }} --password-stdin
 
    - name: Build Docker Image
      run: docker build -f Dockerfile -t myapp:latest . 
