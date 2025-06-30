@@ -39,7 +39,11 @@ jobs:
 
    - name: Set up Docker
      uses: docker/setup-docker-action@v4.3.0
+     with:
+       version: 24.0.5
      
+   - name: Docker Login
+     run: echo ${{ secrets.REPO_PWD}} | docker login -u {[ secrets.REPO_USER ]} --password-stdin
 
    - name: Build Docker Image
      run: docker build -f Dockerfile -t myapp:latest . 
@@ -48,7 +52,6 @@ jobs:
      run: |
       curl -fsSL https://raw.githubusercontent.com/docker/scout-cli/main/install.sh -o install-scount.sh
       sh install-scout.sh
-      echo ${{ secrets.REPO_PWD}} | docker login -u {[ secrets.REPO_USER ]} --password-stdin
       docker scout quickview
       docker scout cves
      
